@@ -3,18 +3,19 @@
 <head>
     <title>Microproject Submission Portal</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <div class="container">
 
     <!-- College Header -->
-    <h2 style="text-align:center;">CARMEL COLLEGE OF ENGINEERING AND TECHNOLOGY PUNNAPRA, ALAPPUZHA</h2>
-    <hr>
+    <h2 class="college-name">CARMEL COLLEGE OF ENGINEERING AND TECHNOLOGY PUNNAPRA, ALAPPUZHA</h2>
+    <hr class="divider">
 
     <!-- Portal Title -->
-    <h1 style="text-align:center;">Microproject Submission Portal</h1>
-    <p style="text-align:center;">Fill your details and submit your microproject.</p>
+    <h1 class="portal-title">🎨 Microproject Submission Portal 🎨</h1>
+    <p class="portal-subtitle">Fill your details and submit your microproject!</p>
 
     <!-- Form in 2 columns -->
     <div class="form-columns">
@@ -95,16 +96,14 @@
 </div>
 
 <!-- Footer -->
-<footer style="text-align:center; margin-top:20px; color:#333;">
+<footer class="footer">
     © 2026 Microproject Submission Portal
 </footer>
 
-<!-- JavaScript -->
 <script>
 function toggleGroupMembers() {
     var isGroup = document.getElementById("isGroup").checked;
-    var groupDiv = document.getElementById("groupMembersDiv");
-    groupDiv.style.display = isGroup ? "block" : "none";
+    document.getElementById("groupMembersDiv").style.display = isGroup ? "block" : "none";
 }
 
 function showMessage() {
@@ -123,20 +122,12 @@ function showMessage() {
         alert("Please fill all details!");
         return;
     }
-    
+
     var reader = new FileReader();
     reader.onload = function() {
         var submission = {
-            name: name,
-            regno: regno,
-            class: studentClass,
-            dept: dept,
-            faculty: faculty,
-            title: title,
-            isGroup: isGroup,
-            groupMembers: groupMembers,
-            fileName: file.name,
-            fileData: reader.result
+            name, regno, class: studentClass, dept, faculty, title,
+            isGroup, groupMembers, fileName: file.name, fileData: reader.result
         };
 
         var submissions = JSON.parse(localStorage.getItem("submissions")) || [];
