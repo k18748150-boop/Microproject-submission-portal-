@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Submissions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Submitted Microprojects</h1>
+
+    <div id="output"></div>
+
+    <br>
+    <a href="index.html">Back to Submission Page</a>
+</div>
+
+<script>
+var submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+
+var outputDiv = document.getElementById("output");
+
+if(submissions.length === 0){
+    outputDiv.innerHTML = "<p>No submissions yet.</p>";
+} else {
+    submissions.forEach(function(item, index){
+outputDiv.innerHTML += `
+    <hr>
+    <p><strong>Student:</strong> ${item.name}</p>
+    <p><strong>Register No:</strong> ${item.regno}</p>
+    <p><strong>Class:</strong> ${item.class}</p>
+    <p><strong>Department:</strong> ${item.dept}</p>
+    <p><strong>Faculty:</strong> ${item.faculty}</p>
+    <p><strong>Project:</strong> ${item.title}</p>
+    <p><strong>File:</strong> 
+        <a href="${item.fileData}" download="${item.fileName}">
+            ${item.fileName}
+        </a>
+    </p>
+`;
+    });
+}
+</script>
+
+</body>
+</html>

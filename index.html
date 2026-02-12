@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Microproject Submission Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- College Header -->
+    <h2 style="text-align:center;">CARMEL COLLEGE OF ENGINEERING AND TECHNOLOGY PUNNAPRA, ALAPPUZHA</h2>
+    <hr>
+
+    <!-- Portal Title -->
+    <h1 style="text-align:center;">Microproject Submission Portal</h1>
+    <p style="text-align:center;">Fill your details and submit your microproject.</p>
+
+    <!-- Form in 2 columns -->
+    <div class="form-columns">
+
+        <div class="form-column">
+            <div class="form-group">
+                <label>Student Name</label>
+                <input type="text" id="name" placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label>Class</label>
+                <select id="class">
+                    <option value="">Select Class</option>
+                    <option>Ⅰ Year</option>
+                    <option>II Year</option>
+                    <option>III Year</option>
+                    <option>IV Year</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Faculty Name</label>
+                <input type="text" id="faculty" placeholder="Enter faculty name">
+            </div>
+
+            <div class="form-group">
+                <label>Upload File</label>
+                <input type="file" id="file">
+            </div>
+        </div>
+
+        <div class="form-column">
+            <div class="form-group">
+                <label>Register Number</label>
+                <input type="text" id="regno" placeholder="Enter your register number">
+            </div>
+
+            <div class="form-group">
+                <label>Department</label>
+                <select id="dept">
+                    <option value="">Select Department</option>
+                    <option>CSE</option>
+                    <option>CE</option>
+                    <option>EEE</option>
+                    <option>MECH</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Project Title</label>
+                <input type="text" id="title" placeholder="Enter project title">
+            </div>
+
+            <!-- Group Project Option -->
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="isGroup" onclick="toggleGroupMembers()"> Group Project
+                </label>
+            </div>
+
+            <div class="form-group" id="groupMembersDiv" style="display:none;">
+                <label>Group Members (comma separated)</label>
+                <input type="text" id="groupMembers" placeholder="Enter names of group members">
+            </div>
+
+            <div class="form-group">
+                <button onclick="showMessage()">Submit Project</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- View Submissions Link -->
+    <br>
+    <a href="submissions.html">View All Submissions</a>
+
+</div>
+
+<!-- Footer -->
+<footer style="text-align:center; margin-top:20px; color:#333;">
+    © 2026 Microproject Submission Portal
+</footer>
+
+<!-- JavaScript -->
+<script>
+function toggleGroupMembers() {
+    var isGroup = document.getElementById("isGroup").checked;
+    var groupDiv = document.getElementById("groupMembersDiv");
+    groupDiv.style.display = isGroup ? "block" : "none";
+}
+
+function showMessage() {
+    var name = document.getElementById("name").value;
+    var regno = document.getElementById("regno").value;
+    var studentClass = document.getElementById("class").value;
+    var dept = document.getElementById("dept").value;
+    var faculty = document.getElementById("faculty").value;
+    var title = document.getElementById("title").value;
+    var fileInput = document.getElementById("file");
+    var file = fileInput.files[0];
+    var isGroup = document.getElementById("isGroup").checked;
+    var groupMembers = isGroup ? document.getElementById("groupMembers").value : "";
+
+    if(name === "" || regno === "" || studentClass === "" || dept === "" || faculty === "" || title === "" || !file) {
+        alert("Please fill all details!");
+        return;
+    }
+    
+    var reader = new FileReader();
+    reader.onload = function() {
+        var submission = {
+            name: name,
+            regno: regno,
+            class: studentClass,
+            dept: dept,
+            faculty: faculty,
+            title: title,
+            isGroup: isGroup,
+            groupMembers: groupMembers,
+            fileName: file.name,
+            fileData: reader.result
+        };
+
+        var submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+        submissions.push(submission);
+        localStorage.setItem("submissions", JSON.stringify(submissions));
+
+        alert("Project Submitted Successfully!");
+        window.location.href = "result.html";
+    };
+    reader.readAsDataURL(file);
+}
+</script>
+
+</body>
+</html>

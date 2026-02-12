@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submission Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Submission Successful 🎉</h1>
+
+    <p><strong>Student Name:</strong> <span id="r_name"></span></p>
+    <p><strong>Register No:</strong> <span id="r_regno"></span></p>
+    <p><strong>Class:</strong> <span id="r_class"></span></p>
+    <p><strong>Department:</strong> <span id="r_dept"></span></p>
+    <p><strong>Faculty:</strong> <span id="r_faculty"></span></p>
+    <p><strong>Project Title:</strong> <span id="r_title"></span></p>
+
+    <br>
+    <a href="index.html">Go Back</a>
+</div>
+
+<script>
+document.getElementById("r_name").innerText = localStorage.getItem("name");
+document.getElementById("r_regno").innerText = localStorage.getItem("regno");
+document.getElementById("r_class").innerText = localStorage.getItem("class");
+document.getElementById("r_dept").innerText = localStorage.getItem("dept");
+document.getElementById("r_faculty").innerText = localStorage.getItem("faculty");
+document.getElementById("r_title").innerText = localStorage.getItem("title");
+</script>
+
+</body>
+</html>
